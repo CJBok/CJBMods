@@ -119,7 +119,130 @@ public class CheatProxyCommon {
 		FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
+	
+	@SubscribeEvent
+	public void playerTick(PlayerTickEvent event) {
+		EntityPlayer plr = event.player;
+		World w = plr.worldObj;
+		
+		if (plr == null || w == null) 
+			return;
+		
+		posx = MathHelper.floor_double(plr.posX);
+		posy = MathHelper.floor_double(plr.posY);
+		posz = MathHelper.floor_double(plr.posZ);
+			
+		if (w instanceof WorldServer) {
+			if (PICKUP.isTrue()) {
+				pickupItems(plr, w);
+			}
+			if (PICKUPORBS.isTrue()) {
+				pickupOrbs(plr, w);
+			}
+			if(Cheats.aemod && CRYSTALGROWTH.isTrue()) {
+				fastCrystalGrowth(w,plr);
+			}
+		}
+		
+		if (DAMAGE.isTrue()) {
+			plr.setHealth(plr.getMaxHealth());
+		}
+			
+		if (XP.isTrue())
+			infiniteXP(plr);
 
+		noItemDamage(plr);
+			
+		if (INFINITEARROWS.isTrue())
+			infiniteArrows(plr, w);
+			
+		if (FOOD.isTrue()) {
+			float food = plr.getFoodStats().getFoodLevel() - 10f;
+			if (food > 0f) {
+				plr.heal(food);
+			}
+			plr.getFoodStats().setFoodLevel(10);
+		}
+			
+		autoJump(plr);
+		
+		if (FASTGROWTH.isTrue())
+			fastGrowth(w);
+			
+		if (AIR.isTrue())
+			infiniteAir(plr);
+
+		if (REMOVEDEBUFFS.isTrue()) {
+			removeDebuffs(plr);
+		}
+			
+		if (Cheats.thaumcraftinstalled && RESEARCHASPECT.isTrue())
+			infiniteResearchAspects(plr);
+			
+		if (Cheats.exnihilo) {
+			updateCrucible();
+		}
+	}
+	
+	@SubscribeEvent
+	public void worldTick(WorldTickEvent event) {
+		
+		World w = event.world;
+		
+		if (w.isRemote)
+			return;
+			
+		CJB.FASTLEAVEDECAY = FASTLEAVEDECAY.isTrue();
+		CJB.NOVOID = NOVOIDFOG.isTrue();
+			
+		List<TileEntity> tiles = new ArrayList();
+		tiles.addAll(w.loadedTileEntityList);
+		for (TileEntity tile : tiles) {
+			if (FASTFURNACE.isTrue() && tile instanceof TileEntityFurnace) {
+				updateFurnace((TileEntityFurnace) tile);
+			}
+			
+			if (tile instanceof IInventory) {
+				noItemDamageTE((IInventory)tile);
+			}
+			
+			if (Cheats.tconstructinstalled && INSTANTSMELTSMELTERY.isTrue() && tile instanceof SmelteryLogic) {
+				updateSmeltery((SmelteryLogic)tile);
+			}
+			
+			if (Cheats.exnihilo && INSTANTSIEVE.isTrue() && tile instanceof TileEntitySieve) {
+				updateSieve((TileEntitySieve)tile);
+			}
+		}
+		
+		if (INVISIBLE.isTrue()) {
+			List<Entity> entities = new ArrayList();
+			entities.addAll(w.loadedEntityList);
+			for (Entity ent : entities) {
+				if (ent instanceof EntityCreature) {
+					if (((EntityCreature) ent).getAttackTarget() instanceof EntityPlayer || ((EntityCreature) ent).getEntityToAttack() instanceof EntityPlayer) {
+						((EntityCreature) ent).setAttackTarget(null);
+						((EntityCreature) ent).setTarget(null);
+					}
+				}
+			}
+		}
+		
+		if (TIME.getInt() > 0) {
+			changeTime(w);
+		}
+		
+		if (ADULT.isTrue()) {
+			instantAdult(w);
+		}
+		
+		if (WEATHER.isTrue()) {
+			disableWeather(w);
+		}
+		
+		keepItemsOnDeath(w);
+	}
+	
 	public void autoJump(EntityPlayer plr) {
 		if (AUTOJUMP.isTrue() && plr.stepHeight != 1F) {
 			plr.stepHeight = 1F;
@@ -399,87 +522,13 @@ public class CheatProxyCommon {
 		for (PotionEffect pe : effects) {
 			if (Potion.potionTypes[pe.getPotionID()] != null) {
             	if (Potion.potionTypes[pe.getPotionID()].isBadEffect()) {
-            		//plr.getActivePotionEffects().remove(pe);
             		plr.removePotionEffect(pe.getPotionID());
             	}
             }
 		}
 	}
 	
-	@SubscribeEvent
-	public void playerTick(PlayerTickEvent event) {
-			EntityPlayer plr = event.player;
-			World w = plr.worldObj;
-			
-			if (plr == null || w == null) 
-				return;
-			
-			posx = MathHelper.floor_double(plr.posX);
-			posy = MathHelper.floor_double(plr.posY);
-			posz = MathHelper.floor_double(plr.posZ);
-			
-			if (w instanceof WorldServer) {
-				if (PICKUP.isTrue()) {
-					pickupItems(plr, w);
-				}
-				if (PICKUPORBS.isTrue()) {
-					pickupOrbs(plr, w);
-				}
-				if(Cheats.aemod && CRYSTALGROWTH.isTrue()) {
-					fastCrystalGrowth(w,plr);
-				}
-			}
-			
-			if (DAMAGE.isTrue()) {
-				plr.setHealth(plr.getMaxHealth());
-			}
-			
-			if (XP.isTrue())
-				infiniteXP(plr);
-
-			noItemDamage(plr);
-			
-			if (INFINITEARROWS.isTrue())
-				infiniteArrows(plr, w);
-			
-			if (FOOD.isTrue()) {
-				
-				float food = plr.getFoodStats().getFoodLevel() - 10f;
-				
-				if (food > 0f) {
-					plr.heal(food);
-				}
-				
-				plr.getFoodStats().setFoodLevel(10);
-			}
-			
-			autoJump(plr);
-			
-			if (FASTGROWTH.isTrue())
-				fastGrowth(w);
-			
-			if (AIR.isTrue())
-				infiniteAir(plr);
-
-			if (REMOVEDEBUFFS.isTrue()) {
-				removeDebuffs(plr);
-			}
-			
-			if (Cheats.thaumcraftinstalled && RESEARCHASPECT.isTrue())
-				infiniteResearchAspects(plr);
-			
-			if (Cheats.exnihilo) {
-				updateCrucible();
-			}
-			
-			/*if (CAMELPACK.isTrue() && Cheats.enviromine){
-				ItemStack armor = plr.getCurrentArmor(2);
-				
-				if (armor != null && EnviroMine.camelPack != null && armor.itemID == EnviroMine.camelPack.itemID) {
-					armor.setItemDamage(0);
-				}
-			}*/
-	}
+	
 	
 	public boolean setItemDamage(ItemStack item, EntityLivingBase entity) {
 		
@@ -507,65 +556,6 @@ public class CheatProxyCommon {
 		}
 		
 		return false;
-	}
-	
-	@SubscribeEvent
-	public void worldTick(WorldTickEvent event) {
-		
-			World w = event.world;
-			
-			if (w.isRemote)
-				return;
-			
-			CJB.FASTLEAVEDECAY = FASTLEAVEDECAY.isTrue();
-			CJB.NOVOID = NOVOIDFOG.isTrue();
-			
-			List<TileEntity> tiles = new ArrayList();
-			tiles.addAll(w.loadedTileEntityList);
-			for (TileEntity tile : tiles) {
-				if (FASTFURNACE.isTrue() && tile instanceof TileEntityFurnace) {
-					updateFurnace((TileEntityFurnace) tile);
-				}
-				
-				if (tile instanceof IInventory) {
-					noItemDamageTE((IInventory)tile);
-				}
-				
-				if (Cheats.tconstructinstalled && INSTANTSMELTSMELTERY.isTrue() && tile instanceof SmelteryLogic) {
-					updateSmeltery((SmelteryLogic)tile);
-				}
-				
-				if (Cheats.exnihilo && INSTANTSIEVE.isTrue() && tile instanceof TileEntitySieve) {
-					updateSieve((TileEntitySieve)tile);
-				}
-			}
-			
-			if (INVISIBLE.isTrue()) {
-				List<Entity> entities = new ArrayList();
-				entities.addAll(w.loadedEntityList);
-				for (Entity ent : entities) {
-					if (ent instanceof EntityCreature) {
-						if (((EntityCreature) ent).getAttackTarget() instanceof EntityPlayer || ((EntityCreature) ent).getEntityToAttack() instanceof EntityPlayer) {
-							((EntityCreature) ent).setAttackTarget(null);
-							((EntityCreature) ent).setTarget(null);
-						}
-					}
-				}
-			}
-			
-			if (TIME.getInt() > 0) {
-				changeTime(w);
-			}
-			
-			if (ADULT.isTrue()) {
-				instantAdult(w);
-			}
-			
-			if (WEATHER.isTrue()) {
-				disableWeather(w);
-			}
-			
-			keepItemsOnDeath(w);
 	}
 	
 	public void updateFurnace(TileEntityFurnace tile) {
