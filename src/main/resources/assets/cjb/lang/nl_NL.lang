@@ -1,0 +1,106 @@
+#API
+cjb.api.gui.modsettings.title= Instellingen
+cjb.api.gui.modkeys.title= Toetsen
+cjb.api.keys.menu=Menu
+
+#CHEATS
+cjb.options.on=AAN
+cjb.options.off=UIT
+cjb.options.vanilla=Standaard
+cjb.options.nodamage=Geen Schade
+cjb.options.onehitkill=Een Slag Dood
+cjb.options.infinitefood=Nooit Hunger
+cjb.options.invisible=Onzichtbaar
+cjb.options.pickupradius=Vergroot Voorwerp Oppak Afstand
+cjb.options.fastfurnace=Verhoog Oven Smelt Snelheid
+cjb.options.infinitexp=Oneindig Ervaringspunten
+cjb.options.noitemdamage=Geen Voorwerp Schade
+cjb.options.infinitearrows=Oneindig Pijlen
+cjb.options.autojump=Automatisch Springen
+cjb.options.time=Tijd
+cjb.options.time.normal=Normaal
+cjb.options.time.alwaysday=Altijd Dag
+cjb.options.time.alwaysnight=Altijd Nacht
+cjb.options.adult=Dieren Sneller Volwassen
+cjb.options.fastgrowth=Snelle Planten Groei
+cjb.options.blockbreakspeed=Blok Breek Snelheid
+cjb.options.blockbreakspeed.normal=Normaal
+cjb.options.blockbreakspeed.fast=Snel
+cjb.options.blockbreakspeed.veryfast=Erg Snel
+cjb.options.nopickaxe=Ontgon Zonder Pikhouweel
+cjb.options.weather=Weer Uitschakelen
+cjb.options.air=Oneindig Lucht
+cjb.options.keepitems=Behoud Voorwerpen Wanneer Dood
+cjb.options.novoidfog=Geen Void Fog
+cjb.options.ic2itemenergy=Oneindig Voorwerp Energie
+cjb.options.researchaspect=Oneindig Research Aspects
+cjb.options.infinitewandvis=Oneindig Staf Vis
+cjb.options.camelpack=Oneindig Camel Pack
+
+#MOREINFO
+cjb.options.viewmode=Weergave Modus
+cjb.options.viewmode.default=Standaard
+cjb.options.viewmode.classic=Klassiek
+cjb.options.biggertextsize=Grotere Tekst Grootte
+cjb.options.showdaytime=Dag/Tijd Weergeven
+cjb.options.show12hclock=12 Uurs Klok Weergeven
+cjb.options.showlightlevel=LichtNiveau Weergeven
+cjb.options.showbiome=Biome Weergeven
+cjb.options.showfps=FPS Weergeven
+cjb.options.showxp=Ervaringspunten Info Weergeven
+cjb.options.showarrows=Aantal Pijlen Weergeven
+cjb.options.showiteminfo=Voorwerpen Info Weergeven
+cjb.options.showcoords=Coördinaties Weergeven
+cjb.options.showdebuffs=Drank Effecten Weergeven
+cjb.options.showvillageinfo=Dorp Info Weergeven
+cjb.options.showslimechunk=Slijm Chunk Weergeven
+cjb.options.showweather=Weer Info Weergeven
+cjb.options.showmobhealth=Mob Gezondheid Weergeven
+cjb.options.infoposition=Positie
+cjb.options.classicposition=Klassieke Positie
+cjb.options.showblocktooltip=Blok Tooltip Weergeven
+cjb.options.tooltipposition=Positie Tooltip
+
+cjb.options.windowposition.topleft=Links Boven
+cjb.options.windowposition.topcenter=Midden Boven
+cjb.options.windowposition.topright=Rechts Boven
+cjb.options.windowposition.bottomleft=Links Onder
+cjb.options.windowposition.bottomright=Rechts Onder
+
+cjb.moreinfo.tab.potioneffects=Drank Effecten
+cjb.moreinfo.tab.village=Dorp
+cjb.moreinfo.tab.village.villagers=Bewoners
+cjb.moreinfo.tab.village.doors=Deuren
+cjb.moreinfo.tab.village.size=Grootte
+cjb.moreinfo.tab.village.reputation=Reputatie
+cjb.moreinfo.tab.village.distance=Afstnad
+cjb.moreinfo.tab.iteminfo=Voorwerpen Info
+cjb.moreinfo.tab.arrows=Pijlen
+cjb.moreinfo.tab.time=Tijd
+cjb.moreinfo.tab.lightlevel=Light Niveau
+cjb.moreinfo.tab.biome=Biome
+cjb.moreinfo.tab.slimechunk=Slijm Chunk
+cjb.moreinfo.tab.fps=FPS
+cjb.moreinfo.tab.weather=Weer
+cjb.moreinfo.tab.exp=Ervaringspunten
+cjb.moreinfo.tab.coords=Coord
+cjb.moreinfo.tab.toggles=Toggles
+cjb.moreinfo.tab.toggles.spawnarea=Showing Spawn Area's
+cjb.moreinfo.tab.toggles.flying=Flying
+
+#SETHOMES
+cjb.homes.commands.delhome.usage= [naam] - Verwijder thuis locatie.
+cjb.homes.commands.delhome.deleted= verwijderd.
+cjb.homes.commands.delhome.notfound= niet gevonden.
+
+cjb.homes.commands.home.usage= [naam] Teleporteer naar opgeslagen thuis locatie.
+cjb.homes.commands.home.list=Thuis lijst: 
+cjb.homes.commands.home.nohomes=Geen thuis locaties gevonden. Gebruik /sethome [naam] om een thuis locatie te creëren.
+cjb.homes.commands.home.cantdimension=Je kunt niet vanuit deze dementie teleporteren.
+cjb.homes.commands.home.teleportedto=Geteleporteerd naar 
+cjb.homes.commands.home.notfound= niet gevonden.
+
+cjb.homes.commands.sethome.usage= [naam] - Bewaar je huidige locatie.
+cjb.homes.commands.sethome.tooshort=Naam is te kort!
+cjb.homes.commands.sethome.nonumber=Naam mag niet beginnen met een cijfer!
+cjb.homes.commands.sethome.created=Thuis locatie %1$s gecreëerd.

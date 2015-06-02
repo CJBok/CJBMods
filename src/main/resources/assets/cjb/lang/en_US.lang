@@ -1,0 +1,119 @@
+#API
+cjb.api.gui.modsettings.title= Settings
+cjb.api.gui.modkeys.title= Keys
+cjb.api.keys.menu=Menu
+
+#CHEATS
+cjb.options.on=ON
+cjb.options.off=OFF
+cjb.options.vanilla=Vanilla
+cjb.options.nodamage=No Damage
+cjb.options.onehitkill=One Hit Kill
+cjb.options.infinitefood=Disable Hunger
+cjb.options.invisible=Invisible
+cjb.options.pickupradius=Increase Item Pickup Radius
+cjb.options.pickupradiusorbs=Increase Orbs Pickup Radius
+cjb.options.fastfurnace=Increase Furnace Smelt Speed
+cjb.options.infinitexp=Infinite XP
+cjb.options.noitemdamage=No Tools Damage
+cjb.options.infinitearrows=Infinite Arrows
+cjb.options.autojump=Auto Jump
+cjb.options.time=Time
+cjb.options.time.normal=Normal
+cjb.options.time.alwaysday=Always Day
+cjb.options.time.alwaysnight=Always Night
+cjb.options.adult=Animals Faster Adult
+cjb.options.fastgrowth=Fast Plant Growth
+cjb.options.blockbreakspeed=Block Break Speed
+cjb.options.blockbreakspeed.normal=Normal
+cjb.options.blockbreakspeed.fast=Fast
+cjb.options.blockbreakspeed.veryfast=Very Fast
+cjb.options.nopickaxe=Mine Without Pickaxe
+cjb.options.weather=Disable Weather
+cjb.options.air=Infinite Air
+cjb.options.keepitems=Keep Items On Death
+cjb.options.novoidfog=Disabled Void Fog
+cjb.options.fastleavedecay=Fast Leaves Decay
+cjb.options.removedebuffs=Remove Negative Buffs
+cjb.options.ic2itemenergy=Infinite Item Energy
+cjb.options.researchaspect=Infinite Research Aspects
+cjb.options.infinitewandvis=Infinite Wand Vis
+cjb.options.camelpack=Infinite Camel Pack
+cjb.options.fastcrystalgrowth=Fast Crystal Growth
+cjb.options.instantsmeltsmeltery=Smeltery Instant Smelt
+cjb.options.instantsieve=Instant Sieve
+cjb.options.fastercrucibles=Faster Crucibles
+
+#MOREINFO
+cjb.options.viewmode=View Mode
+cjb.options.viewmode.default=Default
+cjb.options.viewmode.classic=Classic
+cjb.options.biggertextsize=Bigger Text Size
+cjb.options.showdaytime=Show Day/Time
+cjb.options.show12hclock=Show 12 Hour Clock
+cjb.options.showlightlevel=Show LightLevel
+cjb.options.showbiome=Show Biome
+cjb.options.showfps=Show FPS
+cjb.options.showxp=Show XP Info
+cjb.options.showarrows=Show Arrow Amount
+cjb.options.showiteminfo=Show Item Info
+cjb.options.showcoords=Show Coordinates
+cjb.options.showdebuffs=Show Debuffs
+cjb.options.showvillageinfo=Show Village Info
+cjb.options.showslimechunk=Show Slime Chunk
+cjb.options.showweather=Show Weather Info
+cjb.options.showmobhealth=Show Mob Health
+cjb.options.infoposition=Position
+cjb.options.classicposition=Classic Position
+cjb.options.showblocktooltip=Show Block Tooltip
+cjb.options.tooltipposition=Tooltip Position
+cjb.options.showarmorhead=Show Damage Head
+cjb.options.showarmorchest=Show Damage Chest
+cjb.options.showarmorlegs=Show Damage Legs
+cjb.options.showarmorfeet=Show Damage Feet
+
+cjb.options.windowposition.topleft=Top Left
+cjb.options.windowposition.topcenter=Top Center
+cjb.options.windowposition.topright=Top Right
+cjb.options.windowposition.bottomleft=Bottom Left
+cjb.options.windowposition.bottomright=Bottom Right
+
+cjb.moreinfo.tab.potioneffects=Debuffs
+cjb.moreinfo.tab.village=Village
+cjb.moreinfo.tab.village.villagers=Villagers
+cjb.moreinfo.tab.village.doors=Doors
+cjb.moreinfo.tab.village.size=Size
+cjb.moreinfo.tab.village.reputation=Reputation
+cjb.moreinfo.tab.village.distance=Distance
+cjb.moreinfo.tab.village=Village
+cjb.moreinfo.tab.iteminfo=Item Info
+cjb.moreinfo.tab.arrows=Arrows
+cjb.moreinfo.tab.time=Time
+cjb.moreinfo.tab.lightlevel=Light Level
+cjb.moreinfo.tab.biome=Biome
+cjb.moreinfo.tab.slimechunk=Slime Chunk
+cjb.moreinfo.tab.fps=FPS
+cjb.moreinfo.tab.weather=Weather
+cjb.moreinfo.tab.exp=Exp
+cjb.moreinfo.tab.coords=Coords
+cjb.moreinfo.tab.toggles=Toggles
+cjb.moreinfo.tab.toggles.spawnarea=Showing Spawn Area's
+cjb.moreinfo.tab.toggles.flying=Flying
+cjb.moreinfo.tab.armor=Armor
+
+#SETHOMES
+cjb.homes.commands.delhome.usage=/delhome [name] - Deletes home location
+cjb.homes.commands.delhome.deleted=%1$s deleted.
+cjb.homes.commands.delhome.notfound=%1$s not found.
+
+cjb.homes.commands.home.usage=/home [name] - Teleport to saved home location.
+cjb.homes.commands.home.list=Homes list: %1$s
+cjb.homes.commands.home.nohomes=No home locations found. Use /sethome [name] to create a home location.
+cjb.homes.commands.home.cantdimension=You can't teleport from this dimension.
+cjb.homes.commands.home.teleportedto=Teleported to %1$s
+cjb.homes.commands.home.notfound=%1$s not found.
+
+cjb.homes.commands.sethome.usage=/sethome [name] - Save your current location.
+cjb.homes.commands.sethome.tooshort=Name is too short!
+cjb.homes.commands.sethome.nonumber=Name may not start with a number!
+cjb.homes.commands.sethome.created=Home location %1$s created.
