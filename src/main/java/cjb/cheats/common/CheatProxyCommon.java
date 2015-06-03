@@ -416,6 +416,7 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Increase block breaking speed
 	@SubscribeEvent
 	public void onBreakSpeed(BreakSpeed event) {
 		int cheat = CheatProxyCommon.BLOCKBREAKSPEED.getInt();
@@ -435,12 +436,14 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Always collect resources from destroyed blocks. No matter which item you use
 	@SubscribeEvent
 	public void onHarvestCheck(HarvestCheck event) {
 		if (CheatProxyCommon.NOPICKAXE.isTrue())
 			event.success = true;
 	}
 	
+	//Handles One Hit Kill and Invincible
 	@SubscribeEvent
 	public void onLivingHurtEvent(LivingHurtEvent event) {
 		
@@ -460,6 +463,7 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//If player targeted by EntityCreature remove target.
 	@SubscribeEvent
 	public void onLivingSetAttackTargetEvent(LivingSetAttackTargetEvent event) {
 		if (INVISIBLE.isTrue() && (event.entityLiving instanceof EntityCreature)) {
@@ -470,6 +474,7 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Pickup Items in a 8 block radius
 	public void pickupItems(EntityPlayer plr, World w) {
 		
 		if (w.isRemote)
@@ -492,6 +497,7 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Pickup XP Orbs in a 32 block radius.
 	public void pickupOrbs(EntityPlayer plr, World w) {
 		if (w.isRemote)
 			return;
@@ -507,7 +513,10 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Remove negative buffs
 	public void removeDebuffs(EntityPlayer plr) {
+		plr.extinguish();
+		
 		List<PotionEffect> effects = new ArrayList<PotionEffect>();
 		effects.addAll(plr.getActivePotionEffects());
 		
@@ -528,10 +537,7 @@ public class CheatProxyCommon {
 		}
 	}
 	
-	
-	
 	public boolean setItemDamage(ItemStack item, EntityLivingBase entity) {
-		
 		if (WANDVIS.isTrue() && Cheats.thaumcraftinstalled && item.getItem() instanceof ItemWandCasting) {
 			ItemWandCasting iwc = (ItemWandCasting) item.getItem();
 			
@@ -558,6 +564,7 @@ public class CheatProxyCommon {
 		return false;
 	}
 	
+	//Update furnace untill burntime is completed
 	public void updateFurnace(TileEntityFurnace tile) {
 		while(true) {
 			if (tile.furnaceBurnTime > 0 && tile.furnaceCookTime < 199) {
@@ -568,7 +575,8 @@ public class CheatProxyCommon {
 			}
 		}
 	}
-		
+	
+	//Update melting progress to finished in smeltery
 	private void updateSmeltery(SmelteryLogic tile) {		
 		for (int i = 0; i < tile.maxBlockCapacity; i++) {
 			if (tile.isStackInSlot(i) && tile.meltingTemps[i] > 200)
@@ -580,12 +588,14 @@ public class CheatProxyCommon {
 		}
 	}
 	
+	//Update Sieve Process with Creative Command
 	public void updateSieve(TileEntitySieve tile) {
 		if (tile.mode == TileEntitySieve.SieveMode.FILLED) {
 			tile.ProcessContents(true);
 		}
 	}
 	
+	//Change the melting speed of torches
 	public void updateCrucible() {
 		if (FASTERCRUCIBLES.isTrue()) {
 			if (HeatRegistry.getSpeed(Blocks.torch, 0) == 0.1F) {
@@ -602,6 +612,7 @@ public class CheatProxyCommon {
 		}
 	}
 
+	//Disable the food bar when DisableHunger is enabled.
 	@SubscribeEvent
 	public void RenderGameOverlayEvent(RenderGameOverlayEvent.Pre event) {
 		if (FOOD.isTrue() && Minecraft.getMinecraft().ingameGUI instanceof GuiIngameForge) {
