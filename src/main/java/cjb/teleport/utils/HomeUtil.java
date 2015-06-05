@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.network.play.server.S1DPacketEntityEffect;
+import net.minecraft.network.play.server.S1FPacketSetExperience;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
@@ -152,5 +153,6 @@ public class HomeUtil {
         }
 
         FMLCommonHandler.instance().firePlayerChangedDimensionEvent(plr, j, dimension);
+        plr.playerNetServerHandler.sendPacket(new S1FPacketSetExperience(plr.experience, plr.experienceTotal, plr.experienceLevel));
     }
 }
