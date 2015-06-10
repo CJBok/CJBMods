@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import tconstruct.smeltery.logic.SmelteryLogic;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -45,13 +46,6 @@ import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
-import tconstruct.library.tools.AbilityHelper;
-import tconstruct.library.tools.ToolCore;
-import tconstruct.smeltery.logic.SmelteryLogic;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.items.wands.ItemWandCasting;
-import thaumcraft.common.lib.research.PlayerKnowledge;
 import appeng.items.misc.ItemCrystalSeed;
 import cjb.api.CJB;
 import cjb.api.CJBAPI;
@@ -61,7 +55,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
-import exnihilo.blocks.tileentities.TileEntityCrucible;
 import exnihilo.blocks.tileentities.TileEntitySieve;
 import exnihilo.registries.HeatRegistry;
 
@@ -206,12 +199,16 @@ public class CheatProxyCommon {
 				noItemDamageTE((IInventory)tile);
 			}
 			
-			if (Cheats.tconstructinstalled && INSTANTSMELTSMELTERY.isTrue() && tile instanceof SmelteryLogic) {
-				updateSmeltery((SmelteryLogic)tile);
+			if (Cheats.tconstructinstalled && INSTANTSMELTSMELTERY.isTrue() ) {
+				if (tile instanceof SmelteryLogic) {
+					updateSmeltery(tile);
+				}
 			}
 			
-			if (Cheats.exnihilo && INSTANTSIEVE.isTrue() && tile instanceof TileEntitySieve) {
-				updateSieve((TileEntitySieve)tile);
+			if (Cheats.exnihilo && INSTANTSIEVE.isTrue()) {
+				if (tile instanceof TileEntitySieve) {
+					updateSieve(tile);
+				}
 			}
 		}
 		
@@ -345,15 +342,15 @@ public class CheatProxyCommon {
 	}
 	
 	public void infiniteResearchAspects(EntityPlayer plr) {
-		if (!Cheats.thaumcraftinstalled || Thaumcraft.proxy == null)
+		if (!Cheats.thaumcraftinstalled || thaumcraft.common.Thaumcraft.proxy == null)
 			return;
 		
-		PlayerKnowledge pk = Thaumcraft.proxy.getPlayerKnowledge();
+		thaumcraft.common.lib.research.PlayerKnowledge pk = thaumcraft.common.Thaumcraft.proxy.getPlayerKnowledge();
 		
-		if (pk == null || Aspect.aspects == null)
+		if (pk == null || thaumcraft.api.aspects.Aspect.aspects == null)
 			return;
 		
-		for (Aspect aspect : Aspect.aspects.values()) {
+		for (thaumcraft.api.aspects.Aspect aspect : thaumcraft.api.aspects.Aspect.aspects.values()) {
 			pk.addDiscoveredAspect(plr.getCommandSenderName(), aspect);
 			pk.setAspectPool(plr.getCommandSenderName(), aspect, (short)999);
 		}
@@ -538,10 +535,10 @@ public class CheatProxyCommon {
 	}
 	
 	public boolean setItemDamage(ItemStack item, EntityLivingBase entity) {
-		if (WANDVIS.isTrue() && Cheats.thaumcraftinstalled && item.getItem() instanceof ItemWandCasting) {
-			ItemWandCasting iwc = (ItemWandCasting) item.getItem();
+		if (WANDVIS.isTrue() && Cheats.thaumcraftinstalled && item.getItem() instanceof thaumcraft.common.items.wands.ItemWandCasting) {
+			thaumcraft.common.items.wands.ItemWandCasting iwc = (thaumcraft.common.items.wands.ItemWandCasting) item.getItem();
 			
-			for (Aspect aspect : Aspect.getPrimalAspects()) {
+			for (thaumcraft.api.aspects.Aspect aspect : thaumcraft.api.aspects.Aspect.getPrimalAspects()) {
 				iwc.storeVis(item, aspect, iwc.getMaxVis(item));
 			}
 		}
@@ -577,7 +574,8 @@ public class CheatProxyCommon {
 	}
 	
 	//Update melting progress to finished in smeltery
-	private void updateSmeltery(SmelteryLogic tile) {		
+	private void updateSmeltery(TileEntity t) {	
+		SmelteryLogic tile = (SmelteryLogic) t;
 		for (int i = 0; i < tile.maxBlockCapacity; i++) {
 			if (tile.isStackInSlot(i) && tile.meltingTemps[i] > 200)
 			{
@@ -589,7 +587,8 @@ public class CheatProxyCommon {
 	}
 	
 	//Update Sieve Process with Creative Command
-	public void updateSieve(TileEntitySieve tile) {
+	public void updateSieve(TileEntity t) {
+		TileEntitySieve tile = (TileEntitySieve) t;
 		if (tile.mode == TileEntitySieve.SieveMode.FILLED) {
 			tile.ProcessContents(true);
 		}
